@@ -35,7 +35,7 @@ addons:
               targets:
                 - .: (( inject meta.dns.query ))
                   query: 'q-s4'
-                  instance_group: bbs
+                  instance_group: diego-api
 
             - domain: blobstore.service.cf.internal
               targets:
@@ -76,7 +76,7 @@ addons:
             - domain: locket.service.cf.internal
               targets:
                 - .: (( inject meta.dns.query ))
-                  instance_group: bbs
+                  instance_group: diego-api
 
             - domain: loggregator-trafficcontroller.service.cf.internal
               targets:
@@ -101,7 +101,7 @@ addons:
             - domain: silk-controller.service.cf.internal
               targets:
                 - .: (( inject meta.dns.query ))
-                  instance_group: bbs
+                  instance_group: diego-api
 
             - domain: sql-db.service.cf.internal
               targets:
