@@ -29,6 +29,7 @@ addons:
 
 
       - name: forwarder_agent
+        release: loggregator-agent
         include:
           stemcell:
           - os: ubuntu-xenial
