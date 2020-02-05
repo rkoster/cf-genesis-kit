@@ -1,6 +1,6 @@
 ---
 instance_groups:
-  - name: cell
+  - name: diego-cell
     jobs:
       - name: garden
         properties:
