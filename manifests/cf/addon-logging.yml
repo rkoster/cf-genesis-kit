@@ -27,8 +27,6 @@ addons:
             server_name:  loggregator_agent_metrics
             .:            (( inject meta.certs.metrics.loggregator_agent_metrics_tls ))
 
-
-
       - name: prom_scraper
         release:  loggregator-agent
         properties:
@@ -37,21 +35,22 @@ addons:
           metrics:
             server_name:  prom_scraper_metrics
             .:            (( inject meta.certs.metrics.prom_scraper_metrics_tls ))
-    - name: forwarder_agent
+
+  - name: forwarder_agent
+    release: loggregator-agent
+    include:
+      stemcell:
+      - os: ubuntu-xenial
+    jobs:
+    - name: loggr-forwarder-agent
       release: loggregator-agent
-      include:
-        stemcell:
-        - os: ubuntu-xenial
-      jobs:
-      - name: loggr-forwarder-agent
-        release: loggregator-agent
-        properties:
-          tls:
-            ca_cert:    (( grab meta.certs.loggregator.agent.ca_cert ))
-            cert:     (( grab meta.certs.loggregator.agent.cert ))
-            key:      (( grab meta.certs.loggregator.agent.key ))
-          metrics:
-            server_name: forwarder_agent_metrics
-            .:            (( inject meta.certs.metrics.loggregator_agent_metrics_tls ))
+      properties:
+        tls:
+          ca_cert:    (( grab meta.certs.loggregator.agent.ca_cert ))
+          cert:     (( grab meta.certs.loggregator.agent.cert ))
+          key:      (( grab meta.certs.loggregator.agent.key ))
+        metrics:
+          server_name: forwarder_agent_metrics
+          .:            (( inject meta.certs.metrics.loggregator_agent_metrics_tls ))
 
 
