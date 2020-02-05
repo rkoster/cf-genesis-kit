@@ -42,7 +42,6 @@ merge=( manifests/cf/base.yml
         manifests/cf/addon-cfdot.yml
         manifests/cf/addon-dns.yml
 
-        manifests/cf/variables.yml
 
         )
 
