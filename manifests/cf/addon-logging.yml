@@ -14,6 +14,8 @@ addons:
       - name: loggregator_agent
         release: loggregator-agent
         properties:
+          grpc_port: 3459
+          disable_udp: true
           loggregator:
             tls:
               ca_cert:    (( grab meta.certs.loggregator.agent.ca_cert ))
@@ -24,6 +26,24 @@ addons:
           metrics:
             server_name:  loggregator_agent_metrics
             .:            (( inject meta.certs.metrics.loggregator_agent_metrics_tls ))
+
+
+      - name: forwarder_agent
+        include:
+          stemcell:
+          - os: ubuntu-xenial
+        jobs:
+        - name: loggr-forwarder-agent
+          release: loggregator-agent
+          properties:
+            tls:
+              ca_cert:    (( grab meta.certs.loggregator.agent.ca_cert ))
+              cert:     (( grab meta.certs.loggregator.agent.cert ))
+              key:      (( grab meta.certs.loggregator.agent.key ))
+            metrics:
+              server_name: forwarder_agent_metrics
+              .:            (( inject meta.certs.metrics.loggregator_agent_metrics_tls ))
+
 
       - name: prom_scraper
         release:  loggregator-agent
