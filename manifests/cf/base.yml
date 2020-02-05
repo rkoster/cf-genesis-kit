@@ -193,8 +193,8 @@ instance_groups:
       canary_watch_time: 30000-240000
       update_watch_time: 30000-240000
     migrated_from:
-    - diego
-    - cell
+    - name: diego
+    - name: cell
 
 update:
   canaries: 1
