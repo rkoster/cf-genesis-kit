@@ -29,7 +29,7 @@ addons:
               targets:
                 - .: (( inject meta.dns.query ))
                   query: 'q-s4'
-                  instance_group: diego-cell
+                  instance_group: cell
 
             - domain: bbs.service.cf.internal
               targets:
@@ -45,7 +45,7 @@ addons:
             - domain: cc-uploader.service.cf.internal
               targets:
                 - .: (( inject meta.dns.query ))
-                  instance_group: diego-cell
+                  instance_group: cell
 
             - domain: cloud-controller-ng.service.cf.internal
               targets:
@@ -118,7 +118,7 @@ addons:
             - domain: tps.service.cf.internal
               targets:
                 - .: (( inject meta.dns.query ))
-                  instance_group: diego-cell
+                  instance_group: cell
 
             - domain: uaa.service.cf.internal
               targets:
