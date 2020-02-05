@@ -1,9 +1,9 @@
-variables:
-- name: loggr_udp_forwarder_tls
-  type: certificate
-  options:
-    ca: metric_scraper_ca
-    common_name: loggr_udp_forwarder_metrics
-    extended_key_usage:
-    - server_auth
+#ariables:
+# name: loggr_udp_forwarder_tls
+# type: certificate
+# options:
+#   ca: metric_scraper_ca
+#   common_name: loggr_udp_forwarder_metrics
+#   extended_key_usage:
+#   - server_auth
 

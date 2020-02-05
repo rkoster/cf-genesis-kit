@@ -90,8 +90,8 @@ instance_groups:
               cert: (( grab meta.certs.loggregator.agent.cert ))
               key: (( grab meta.certs.loggregator.agent.key ))
           metrics:
-            ca_cert: ((loggr_udp_forwarder_tls.ca))
-            cert: ((loggr_udp_forwarder_tls.certificate))
-            key: ((loggr_udp_forwarder_tls.private_key))
+            ca_cert: (( grab meta.certs.metrics.loggr_udp_forwarder_tls.ca_cert ))
+            cert: (( grab meta.certs.metrics.loggr_udp_forwarder_tls.cert ))
+            key: (( grab meta.certs.metrics.loggr_udp_forwarder_tls.key ))
             server_name: loggr_udp_forwarder_metrics
         release: loggregator-agent
