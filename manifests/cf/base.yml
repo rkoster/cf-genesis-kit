@@ -194,7 +194,17 @@ instance_groups:
       update_watch_time: 30000-240000
     migrated_from:
     - name: diego
+      az: z1
+    - name: diego
+      az: z2
+    - name: diego
+      az: z0
     - name: cell
+      az: z0
+    - name: cell
+      az: z1
+    - name: cell
+      az: z2
 
 update:
   canaries: 1
