@@ -120,7 +120,7 @@ instance_groups:
     networks:
     - name: (( grab params.cf_internal_network ))
 
-  - name: bbs
+  - name: diego-api
     instances: (( grab params.bbs_instances ))
     vm_type: (( grab params.bbs_vm_type ))
     azs: (( grab params.availability_zones || meta.default.azs ))
@@ -128,7 +128,7 @@ instance_groups:
     networks:
       - name: (( grab params.cf_internal_network ))
     migrated_from:
-      - name: diego-api
+      - name: bbs
     update:
       serial: true
 
@@ -180,15 +180,7 @@ instance_groups:
     update:
       vm_strategy: create-swap-delete
 
-  - name: diego # metron, auctioneer, tps, cc_uploader, route_emitter
-    instances: (( grab params.diego_instances ))
-    vm_type: (( grab params.diego_vm_type ))
-    azs: (( grab params.availability_zones || meta.default.azs ))
-    stemcell: default
-    networks:
-      - name: (( grab params.cf_internal_network ))
-
-  - name: cell
+  - name: diego-cell
     instances: (( grab params.cell_instances ))
     vm_type: (( grab params.cell_vm_type ))
     azs: (( grab params.availability_zones || meta.default.azs ))
@@ -201,7 +193,8 @@ instance_groups:
       canary_watch_time: 30000-240000
       update_watch_time: 30000-240000
     migrated_from:
-      - name: diego-cell
+    - diego
+    - cell
 
 update:
   canaries: 1

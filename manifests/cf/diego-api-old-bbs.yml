@@ -8,7 +8,7 @@ meta:
     require_tls: true
 
 instance_groups:
-  - name: bbs
+  - name: diego-api
     jobs:
       - name: bbs
         release: diego
@@ -81,3 +81,17 @@ instance_groups:
                 db_password:  (( grab params.locketdb_password ))
                 db_driver:  (( grab params.locketdb_scheme ))
           loggregator: (( grab meta.diego_loggregator_client_tls ))
+
+      - name: loggr-udp-forwarder
+        properties:
+          loggregator:
+            tls:
+              ca: (( grab meta.certs.loggregator.agent.ca_cert))
+              cert: (( grab meta.certs.loggregator.agent.cert ))
+              key: (( grab meta.certs.loggregator.agent.key ))
+          metrics:
+            ca_cert: ((loggr_udp_forwarder_tls.ca))
+            cert: ((loggr_udp_forwarder_tls.certificate))
+            key: ((loggr_udp_forwarder_tls.private_key))
+            server_name: loggr_udp_forwarder_metrics
+        release: loggregator-agent
