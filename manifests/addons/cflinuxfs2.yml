@@ -31,7 +31,7 @@ releases:
     sha1:    cbee634a14c42b7f9be48506f6a551960cac1652
 
 instance_groups:
-  - name: diego-cell
+  - name: cell
     jobs:
       - name: rep
         properties:

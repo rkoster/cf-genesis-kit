@@ -4,7 +4,7 @@ meta:
     volume_services_enabled: true
 
 instance_groups:
-  - name: diego-cell
+  - name: cell
     jobs:
       - (( append ))
 

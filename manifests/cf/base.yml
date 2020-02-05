@@ -180,7 +180,7 @@ instance_groups:
     update:
       vm_strategy: create-swap-delete
 
-  - name: diego-cell
+  - name: cell
     instances: (( grab params.cell_instances ))
     vm_type: (( grab params.cell_vm_type ))
     azs: (( grab params.availability_zones || meta.default.azs ))
@@ -194,17 +194,7 @@ instance_groups:
       update_watch_time: 30000-240000
     migrated_from:
     - name: diego
-      az: z1
-    - name: diego
-      az: z2
-    - name: diego
-      az: z0
     - name: cell
-      az: z0
-    - name: cell
-      az: z1
-    - name: cell
-      az: z2
 
 update:
   canaries: 1

@@ -30,7 +30,7 @@ params:
   evacuation_timeout: 600
 
 instance_groups:
-  - name: diego-cell
+  - name: cell
     jobs:
     - name: cflinuxfs3-rootfs-setup
       release: cflinuxfs3
@@ -109,9 +109,9 @@ instance_groups:
         client_key:  (( grab meta.certs.silk.daemon.key ))
     - name: silk-cni
       release: silk
+
     - name: containerd
       release: garden-runc
-
 
     - name: auctioneer
       release: diego

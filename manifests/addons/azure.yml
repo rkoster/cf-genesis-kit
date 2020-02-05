@@ -46,7 +46,7 @@ instance_groups:
       - (( append ))
       - diego_as
 
-  - name: diego-cell
+  - name: cell
     vm_extensions:
       - (( append ))
       - cell_as
