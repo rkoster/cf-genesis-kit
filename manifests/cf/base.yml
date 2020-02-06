@@ -210,7 +210,6 @@ instance_groups:
       update_watch_time: 30000-240000
     migrated_from:
     - name: diego
-    - name: api
     - name: router
 
 update:
