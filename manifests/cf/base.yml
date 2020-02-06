@@ -213,6 +213,7 @@ instance_groups:
     - name: diego
     - name: api
     - name: cell
+    - name: router
 
 update:
   canaries: 1
