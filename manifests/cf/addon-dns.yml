@@ -45,7 +45,7 @@ addons:
             - domain: cc-uploader.service.cf.internal
               targets:
                 - .: (( inject meta.dns.query ))
-                  instance_group: api
+                  instance_group: scheduler
 
             - domain: cloud-controller-ng.service.cf.internal
               targets:
