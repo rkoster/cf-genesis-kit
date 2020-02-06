@@ -53,6 +53,7 @@ params:
   bbs_instances:         2
   cell_instances:        3
   diego_instances:       2
+  scheduler_instance:    1
   doppler_instances:     2
   loggregator_instances: 2
   nats_instances:        2
@@ -65,7 +66,7 @@ params:
   api_vm_type:         api
   bbs_vm_type:         bbs
   cell_vm_type:        cell
-  diego_vm_type:       diego
+  scheduler:           diego
   doppler_vm_type:     doppler
   errand_vm_type:      errand
   loggregator_vm_type: loggregator
@@ -194,6 +195,23 @@ instance_groups:
       update_watch_time: 30000-240000
     migrated_from:
     - name: diego
+    - name: cell
+
+  - name: scheduler
+    instances: (( grab params.scheduler_instances ))
+    vm_type: (( grab params.scheduler_vm_type ))
+    azs: (( grab params.availability_zones || meta.default.azs ))
+    stemcell: default
+    networks:
+      - name: (( grab params.cf_runtime_network ))
+    update:
+      serial: true
+      max_in_flight: 1
+      canary_watch_time: 30000-240000
+      update_watch_time: 30000-240000
+    migrated_from:
+    - name: diego
+    - name: api
     - name: cell
 
 update:

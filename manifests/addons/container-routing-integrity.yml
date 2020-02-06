@@ -16,7 +16,7 @@ instance_groups:
                 - gorouter.service.cf.internal
                 - ssh-proxy.service.cf.internal
 
-  - name: router
+  - name: scheduler
     jobs:
       - name: ssh_proxy
         properties:

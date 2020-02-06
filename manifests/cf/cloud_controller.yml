@@ -69,37 +69,6 @@ instance_groups:
               cc_routing:
                 secret: (( grab meta.uaa.cc_routing_secret ))
 
-      - name: cloud_controller_clock
-        release: capi
-        properties:
-          system_domain: (( grab params.system_domain ))
-
-          ccdb: (( grab meta.ccdb ))
-          cc:   (( grab meta.cc ))
-
-          logger_endpoint:
-            port: (( grab params.logger_port ))
-
-          uaa:
-            ca_cert: (( grab meta.certs.uaa.ca.cert ))
-            clients:
-              cc-service-dashboards:
-                scope: openid,cloud_controller_service_permissions.read
-                secret: (( grab meta.uaa.cc_broker_secret ))
-
-      - name: cc_deployment_updater
-        release: capi
-        properties:
-          ccdb: (( grab meta.ccdb ))
-          cc:
-            db_encryption_key:             (( vault meta.vault "/cc:db_encryption_key" ))
-            temporary_disable_deployments: (( grab meta.cc.temporary_disable_deployments ))
-            mutual_tls:                    (( grab meta.certs.cf_internal.cc_tls ))
-
-      - name: statsd_injector
-        release: statsd-injector
-        properties: (( grab meta.statsd_injector ))
-
       - name: file_server
         release: diego
         properties:
