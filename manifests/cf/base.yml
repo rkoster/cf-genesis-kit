@@ -51,7 +51,7 @@ params:
 
   api_instances:         2
   bbs_instances:         2
-  cell_instances:        3
+  diego-cell_instances:        3
   diego_instances:       2
   scheduler_instance:    1
   doppler_instances:     2
@@ -65,7 +65,7 @@ params:
 
   api_vm_type:         api
   bbs_vm_type:         bbs
-  cell_vm_type:        cell
+  diego-cell_vm_type:        cell
   scheduler_vm_type:   diego
   doppler_vm_type:     doppler
   errand_vm_type:      errand
@@ -182,8 +182,8 @@ instance_groups:
       vm_strategy: create-swap-delete
 
   - name: diego-cell
-    instances: (( grab params.cell_instances ))
-    vm_type: (( grab params.cell_vm_type ))
+    instances: (( grab params.diego-cell_instances ))
+    vm_type: (( grab params.diego-cell_vm_type ))
     azs: (( grab params.availability_zones || meta.default.azs ))
     stemcell: default
     networks:
@@ -211,7 +211,6 @@ instance_groups:
     migrated_from:
     - name: diego
     - name: api
-    - name: cell
     - name: router
 
 update:
