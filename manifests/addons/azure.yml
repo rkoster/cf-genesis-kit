@@ -36,17 +36,12 @@ instance_groups:
       - (( replace ))  # force replace to remove the cf-load-balanced vm extension
       - router_as
 
-  - name: bbs
+  - name: diego-api
     vm_extensions:
       - (( append ))
       - bbs_as
 
-  - name: diego
-    vm_extensions:
-      - (( append ))
-      - diego_as
-
-  - name: cell
+  - name: diego-cell
     vm_extensions:
       - (( append ))
       - cell_as

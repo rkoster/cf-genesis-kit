@@ -21,7 +21,7 @@ instance_groups:
     #   a) Resolve DNS via BOSH-DNS natively
     #   b) Resolve the internal domain via the service discovery controller
     #
-  - name: cell
+  - name: diego-cell
     jobs:
         # Loopback the BOSH DNS address (169.x.x.x) into the container
         # so that the processes running inside of garden CF Application
@@ -74,7 +74,7 @@ instance_groups:
     # mapped routes on the internal domain, and making them available
     # to the cells as an internal BOSH-DNS dns-over-http zone.
     #
-  - name: cell
+  - name: diego-cell
     jobs:
         # Enable internal routes to be emitted.
         # This is kind of important for internal routing...

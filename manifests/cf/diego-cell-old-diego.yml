@@ -30,7 +30,7 @@ params:
   evacuation_timeout: 600
 
 instance_groups:
-  - name: cell
+  - name: diego-cell
     jobs:
     - name: cflinuxfs3-rootfs-setup
       release: cflinuxfs3

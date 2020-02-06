@@ -181,7 +181,7 @@ instance_groups:
     update:
       vm_strategy: create-swap-delete
 
-  - name: cell
+  - name: diego-cell
     instances: (( grab params.cell_instances ))
     vm_type: (( grab params.cell_vm_type ))
     azs: (( grab params.availability_zones || meta.default.azs ))
