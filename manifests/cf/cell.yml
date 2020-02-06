@@ -70,7 +70,6 @@ instance_groups:
         enable_declarative_healthcheck: true
         loggregator: (( grab meta.diego_loggregator_client_tls ))
         tls:         (( grab meta.certs.cf_internal.diego_rep_agent_v2 )) # .ca_cert, .cert & .key
-
     - name: route_emitter
       release: diego
       properties:
