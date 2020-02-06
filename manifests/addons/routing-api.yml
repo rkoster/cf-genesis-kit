@@ -20,6 +20,12 @@ meta:
 
     
 instance_groups:
+- name: scheduler 
+  jobs:
+  - name: cloud_controller_clock
+    properties:
+      .: (( inject meta.cc.routing_api ))
+
 - name: api
   jobs:
   - name: cloud_controller_ng
@@ -28,9 +34,7 @@ instance_groups:
   - name: cloud_controller_worker
     properties:
       .: (( inject meta.cc.routing_api ))
-  - name: cloud_controller_clock
-    properties:
-      .: (( inject meta.cc.routing_api ))
+
   - name: routing-api
     release: routing
     properties:
