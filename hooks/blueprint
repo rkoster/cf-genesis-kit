@@ -27,14 +27,14 @@ merge=( manifests/cf/base.yml
         manifests/cf/certs.yml
 
         manifests/cf/diego-api-old-bbs.yml
-        manifests/cf/diego-cell-old-diego.yml
+        manifests/cf/cell.yml
         manifests/cf/cloud_controller.yml
         manifests/cf/loggregator.yml
         manifests/cf/nats.yml
         manifests/cf/router.yml
         manifests/cf/syslogger.yml
         manifests/cf/uaa.yml
-        manifests/cf/scheduler.yml
+        manifests/cf/diego.yml
 
         manifests/cf/smoke-tests.yml
 
