@@ -41,6 +41,8 @@ instance_groups:
       release: garden-runc
       properties:
         garden:
+          network_plugin: /var/vcap/packages/runc-cni/bin/garden-external-networker
+          network_plugin_extra_args: [--configFile=/var/vcap/jobs/garden-cni/config/adapter.json]
           containerd_mode: true
           default_container_grace_time: 0
           destroy_containers_on_start: true
@@ -86,29 +88,18 @@ instance_groups:
         uaa:
           ca_cert: (( grab meta.certs.uaa.ca.cert ))
           client_secret: (( grab meta.uaa.tcp_emitter_secret ))
-    - name: silk-cni
-      properties:
-        dns_servers:
-          - 169.254.0.2
-    - name: garden
-      properties:
-        garden:
-          network_plugin: /var/vcap/packages/runc-cni/bin/garden-external-networker
-          network_plugin_extra_args: [--configFile=/var/vcap/jobs/garden-cni/config/adapter.json]
+
     - name: garden-cni
+      release: cf-networking
       properties:
         cni_config_dir: /var/vcap/jobs/silk-cni/config/cni
         cni_plugin_dir: /var/vcap/packages/silk-cni/bin
+
     - name: silk-cni
+      release: silk
       properties:
         dns_servers:
           - 169.254.0.2
-    - name: garden
-      properties:
-        garden:
-          network_plugin: /var/vcap/packages/runc-cni/bin/garden-external-networker
-          network_plugin_extra_args: [--configFile=/var/vcap/jobs/garden-cni/config/adapter.json]
-
 
     - name: netmon
       release: silk
