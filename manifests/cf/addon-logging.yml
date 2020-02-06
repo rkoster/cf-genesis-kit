@@ -26,7 +26,6 @@ addons:
           metrics:
             server_name:  loggregator_agent_metrics
             .:            (( inject meta.certs.metrics.loggregator_agent_metrics_tls ))
-        provides: {}
 
       - name: prom_scraper
         release:  loggregator-agent
