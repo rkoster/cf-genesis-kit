@@ -39,22 +39,3 @@ instance_groups:
               gorouter:
                 secret: (( grab meta.uaa.gorouter_secret ))
 
-      - name: ssh_proxy
-        release: diego
-        provides:
-          ssh_proxy: { as: ssh-proxy, shared: true }
-        properties:
-          enable_consul_service_registration: false
-          loggregator: (( grab meta.diego_loggregator_client_tls ))
-          diego:
-            ssh_proxy:
-              bbs:   (( grab meta.diego_bbs_client_tls ))
-              enable_cf_auth: true
-              disable_healthcheck_server: true
-              host_key: (( vault meta.vault "/ssh_proxy/host_key:private" ))
-              uaa_secret: (( grab meta.uaa.ssh_proxy_secret ))
-              uaa:
-                port: (( grab meta.uaa.ssl_port ))
-                ca_cert: (( grab meta.certs.uaa.ca.cert ))
-            ssl:
-              skip_cert_verify: (( grab params.skip_ssl_validation ))
