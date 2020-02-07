@@ -150,7 +150,9 @@ meta:
     internal_api_password:   (( vault meta.vault "/cc:internal_api" ))
     staging_upload_user:     staging_upload_user
     staging_upload_password: (( vault meta.vault "/cc:staging_upload" ))
-    db_encryption_key:       (( vault meta.vault "/cc:db_encryption_key" ))
+    database_encryption:
+      keys:
+        encryption_key_0:  (( vault meta.vault "/cc:db_encryption_key" ))
     temporary_use_logcache:  true
 
     # we put log-cache on the LTC, not on the dopplers, so the
