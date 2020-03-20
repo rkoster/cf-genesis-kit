@@ -25,6 +25,7 @@ cleanup() {
 	    done
 	done
 }
+set -x
 
 header "Checking previous deployments on ${BOSH_ENVIRONMENT}..."
 $BOSH deployments
