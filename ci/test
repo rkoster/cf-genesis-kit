@@ -2,6 +2,7 @@
 set -eu
 KIT=cf
 SKIP_CLEAN=${SKIP_CLEAN:-"true"}
+SKIP_STABLE=${SKIP_STABLE:-"true"}
 SKIP_FRESH=${SKIP_FRESH:-"false"}
 SKIP_SMOKE_TESTS=${SKIP_SMOKE_TESTS:-"false"}
 SKIP_DEPLOY=${SKIP_DEPLOY:-"false"}
@@ -32,17 +33,35 @@ header "Cleaning up from any previous deployments (if necessary)..."a
 
 if [[ "$SKIP_FRESH" == "false" ]]; then
   cleanup ci-baseline-${KIT}
+  safe rm -rf secret/ci/baseline/${KIT}
 else
   echo "Skipping FRESH"
 fi
-# safe rm -rf secret/ci/baseline/${KIT}
+
+pushd dev
+  CHECKED_BRANCH=$(git branch | cut -f2 -d' ')
+popd
+
+if [[ "$SKIP_STABLE" == "false" ]]; then
+  header "Deploying BASELINE environment from latest STABLE release $(git tag | tail -1)"
+  pushd dev
+    git checkout $(git tag | tail -1)
+    genesis compile-kit --name $KIT -v $(git tag | tail -1 | sed 's#^.##') --force
+  popd
+  genesis add-secrets ci-baseline
+  genesis deploy -y ci-baseline 
+else
+  echo "Skipping STABLE"
+fi
 
 if [[ "$SKIP_DEPLOY" == "false" ]]; then
-  header "Deploying BASELINE environment to verify functionality..."
-  cd dev
-  # make sure hooks are executable before screaming at shipit for failing.
-  genesis compile-kit --name $KIT -v 9.9.9 --force
-  cd ..
+  header "Deploying/Upgrading to BASELINE environment FROM ${CHECKED_BRANCH}"
+  pushd dev
+    rm -rf *.tar.gz
+    # make sure hooks are executable before screaming at shipit for failing.
+    git checkout master
+    genesis compile-kit --name $KIT -v 9.9.9 --force
+  popd
   genesis add-secrets ci-baseline
   genesis deploy -y ci-baseline
 fi

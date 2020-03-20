@@ -103,16 +103,15 @@ meta:
  
     testflight-config:
       params:
+        SKIP_STABLE:          false
         SKIP_FRESH:           false
         SKIP_CLEAN:           true
         SKIP_SMOKE_TESTS:     true
-        SKIP_CATS:            true
     cleanup-config:
       params:
         SKIP_FRESH:           true
         SKIP_CLEAN:           true
         SKIP_SMOKE_TESTS:     true
-        SKIP_CATS:            true
     cats:
       attempts: 5
       config:
@@ -156,9 +155,6 @@ meta:
           BOSH_CA_CERT:         (( grab meta.bosh.cacert ))
           BOSH_CLIENT:          (( grab meta.bosh.username ))
           BOSH_CLIENT_SECRET:   (( grab meta.bosh.password ))
-          SKIP_CLEANUP:         true
-          SKIP_SMOKE_TESTS:     true
-          SKIP_DEPLOY:          true
           SKIP_CATS:            false
           FAILFAST:             true
           VERBOSE:              false
@@ -207,6 +203,20 @@ jobs:
           .: (( inject meta.jobs.testflight-config ))
                   
     - name: cats
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: tests job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: tests job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
       in_parallel:
         fail_fast: true
         limit: 3
