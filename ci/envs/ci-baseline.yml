@@ -82,10 +82,10 @@ instance_groups:
   jobs:
   - name: bbs
     properties:
-      set_kernel_parameters: ""
+      set_kernel_parameters: false
   - name: locket
     properties:
-      set_kernel_parameters: ""
+      set_kernel_parameters: false
 - name: cell
   jobs:
   - name: garden
@@ -94,7 +94,7 @@ instance_groups:
         apparmor_profile: ""
   - name: rep
     properties:
-      set_kernel_parameters: ""
+      set_kernel_parameters: false
 - name: postgres
   # using address (with bosh dns) based auth in pg_hba.conf does not work across zones
   # this is a limitation of the flannel network used by MoltenCore
