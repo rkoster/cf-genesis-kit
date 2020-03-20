@@ -34,7 +34,7 @@ header "Cleaning up from any previous deployments (if necessary)..."a
 
 if [[ "$SKIP_FRESH" == "false" ]]; then
   cleanup ci-baseline-${KIT}
-  safe rm -rf secret/ci/baseline/${KIT}
+  #safe rm -rf secret/ci/baseline/${KIT}
 else
   echo "Skipping FRESH"
 fi
