@@ -65,10 +65,10 @@ function run_cats(){
   pushd ${tmpdir}
   FAILFAST_FLAG=""
   VERBOSE_FLAG=""
-  if [[ ${FAILFAST}=="true" ]];then
+  if [[ "${FAILFAST}" == "true" ]];then
     FAILFAST_FLAG="--failFast"
   fi
-  if [[ ${VERBOSE}=="true" ]];then
+  if [[ "${VERBOSE}" == "true" ]];then
     VERBOSE_FLAG="-v"
   fi
   echo "RUNNING CATS WITH NODES: ${CATS_NODES:-4} ${VERBOSE_FLAG} ${FAILFAST_FLAG}"
